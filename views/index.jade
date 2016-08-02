@@ -9,7 +9,7 @@ block content
     div#todos-container
       div.todo(v-for="todo in todos")
         span.text {{ todo.text }}
-        a.delete(href="/api/todos/{{ todo.id }}", target="blank")
+        a.delete(v-on:click="removeTodo($index, todo.id)")
           i.material-icons delete
         a.single(href="/api/todos/{{ todo.id }}", target="blank")
           i.material-icons open_in_new

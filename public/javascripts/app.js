@@ -28,11 +28,23 @@ var vm = new Vue({
                         text: that.text
                     }),
                     success: function(data) {
-                        console.log(data);
                         that.text = '';
+                        that.todos.push(data);
                     }
                 });
             }
+        },
+        removeTodo: function (index, id) {
+            var that = this;
+
+            $.ajax({
+                url: "/api/todos/" + id,
+                type: "delete",
+                dataType: "json",
+                complete: function(data) {
+                    that.todos.splice(index, 1);
+                }
+            });
         }
     }
 });
