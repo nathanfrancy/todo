@@ -1,58 +1,43 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+let express = require('express');
+let path = require('path');
+let favicon = require('serve-favicon');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+let comb = require('comb');
+let logger = comb.logger('app').addAppender('ConsoleAppender');
 
-var routes = require('./routes/index');
+logger.info("Starting todo app up...");
 
-var app = express();
+// Routes and middleware
+let webRoutes = require('./routes/web');
+let apiRoutes = require('./routes/api');
+let mw = require('./routes/middleware');
+
+// New up new express app
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+// Middlewares
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+// Apply imported routes to express app.
+app.use('/', webRoutes);
+app.use('/api', apiRoutes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+app.use(mw.errorHandlers.notFoundHandler);
 
-// error handlers
+// TODO: get environment here, use one or the other.
+app.use(mw.errorHandlers.developmentDefaultHandler);
+app.use(mw.errorHandlers.productionDefaultHandler);
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
-
+logger.info("Started app successfully...");
 
 module.exports = app;
