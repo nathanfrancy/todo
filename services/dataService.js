@@ -50,7 +50,7 @@ class DataService {
             that.readTodos().then((todos) => {
                 todos.push(todo);
                 that.writeTodos(todos);
-                resolve();
+                resolve(todo);
             }).catch((err) => {
                 logger.error(err.message);
                 reject(err);

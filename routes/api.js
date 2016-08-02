@@ -45,8 +45,8 @@ router.post('/todos', mw.logging.location, (req, res, next) => {
         id: uuid.v4(),
         text: req.body.text,
         created: new Date()
-    }).then(() => {
-        res.status(200).send();
+    }).then((todo) => {
+        res.status(200).json(todo);
     }).catch((err) => {
         logger.error(err.message);
         res.status(500).json({

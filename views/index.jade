@@ -1,4 +1,17 @@
 extends layout
 
 block content
-  h1 Todo
+  h1 Todos
+  div#todos-wrapper
+    div.input-box
+      input(v-model="text", placeholder="Enter a new todo item here...")
+      button.add(v-on:click="createTodo") add
+    div#todos-container
+      div.todo(v-for="todo in todos")
+        span.text {{ todo.text }}
+        a.delete(href="/api/todos/{{ todo.id }}", target="blank")
+          i.material-icons delete
+        a.single(href="/api/todos/{{ todo.id }}", target="blank")
+          i.material-icons open_in_new
+
+  script(type='text/javascript', src='/javascripts/app.js')

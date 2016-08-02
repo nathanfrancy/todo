@@ -1,8 +1,80 @@
+* { box-sizing: border-box; }
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  font: 14px "Roboto", sans-serif;
+  background-color: #efefef;
+}
+
+h1 {
+  font-size: 52px;
+  text-align: center;
+  font-weight: 200;
+  margin: 12px 0 24px 0;
 }
 
 a {
   color: #00B7FF;
+}
+
+#todos-wrapper {
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#todos-container {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+}
+
+.todo {
+  width: 100%;
+  font-size: 32px;
+  font-weight: 200;
+  background-color: white;
+  padding: 12px;
+  border-bottom: 1px #c0c0c0 solid;
+}
+
+.todo .single {
+  float: right;
+}
+
+.todo .delete {
+  float: right;
+}
+
+.input-box {
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.input-box input {
+  width: 500px;
+  height: 50px;
+  border: none;
+  font-size: 20px;
+  outline: none;
+  padding: 12px;
+}
+
+.input-box input:hover {
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+}
+
+.input-box button {
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  font-size: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
+  text-decoration: none;
+  border-radius: 2px;
+  cursor: pointer;
+  color: white;
+  background-color: #1E88E5;
+  text-transform: uppercase;
+  margin-left: 18px;
 }
