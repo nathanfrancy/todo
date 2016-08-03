@@ -7,12 +7,7 @@ let csv = require('fast-csv');
 let fs = require('fs');
 
 let headers = ["id", "text", "created"];
-let dataFile = "temp/data.csv";
-var dir = 'temp';
-
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-}
+let dataFile = "services/data.csv";
 
 class DataService {
 
